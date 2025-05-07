@@ -1,0 +1,21 @@
+# Object-Detection
+ultralytics
+
+# OCR
+# paddlex==3.0rc0
+vision-agent
+
+# PDF-Reader
+PyMuPDF
+
+# Backend & APIs
+fastapi[all]
+uvicorn[standard]
+python-multipart
+
+# NLP
+nltk
+wordcloud
+
+# GUI (Frontend)
+streamlit
