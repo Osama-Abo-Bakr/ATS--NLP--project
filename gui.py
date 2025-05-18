@@ -1,7 +1,6 @@
-import streamlit as st
 import os
 import tempfile
-from typing import List
+import streamlit as st
 from src.ML.detections import predict
 from src.OCR.ocr_detection import loading_data
 from src.Matching.matching import process_all_cvs, load_cv_contexts, search_keywords_in_cv
@@ -30,7 +29,7 @@ st.markdown("""
         color: #4CAF50;
     }
     .report {
-        background-color: white;
+        background-color: inherit;
         border-radius: 10px;
         padding: 20px;
         margin: 10px 0;
@@ -40,6 +39,10 @@ st.markdown("""
         background-color: #e6f7ff;
         padding: 2px 5px;
         border-radius: 3px;
+        color: #000;
+    
+    .report h3, .report p {
+        color: inherit;  /* Inherit text color from Streamlit */
     }
 </style>
 """, unsafe_allow_html=True)
@@ -55,12 +58,13 @@ with st.sidebar:
     - Get detailed analysis reports
     """)
     st.markdown("---")
-    st.markdown("**Developed by:**")
-    st.markdown("- Osama Abo Bakr")
-    st.markdown("- Ahmed Nos7y")
-    st.markdown("- Abdullah Abas")
-    st.markdown("- Youseef Hossam")
-    st.markdown("- Sherief")
+    st.markdown("### Developed by:")
+    st.markdown("- Osama Abo-Bakr")
+    st.markdown("- Ahmed Noshy")
+    st.markdown("- Abdallah Abas")
+    st.markdown("- Youssef Hossam")
+    st.markdown("- Sherief Mohammed")
+    st.markdown("---")
 
 # Main content
 st.header("📄 Resume Analysis Dashboard")
@@ -150,10 +154,16 @@ with tab2:
                 st.markdown(f"### 📊 Domain: {domain}")
                 st.markdown(f"**Keywords used for matching:** {', '.join(keywords_dict[domain])}")
                 
+                
                 for r in report:
+                    # Convert report text to proper HTML
+                    html_content = r.replace('=====', '</h3>').replace('\n', '<br>')
+                    if not html_content.startswith('<h3>'): html_content = '<h3>' + html_content
+                    if not html_content.endswith('</h3>'): html_content += '</h3>'
+                    
                     st.markdown(f"""
                     <div class="report">
-                        {r.replace('=====', '###').replace('\n', '<br>')}
+                        {html_content}
                     </div>
                     """, unsafe_allow_html=True)
                 
@@ -169,6 +179,6 @@ with tab2:
 st.markdown("---")
 st.markdown("""
     <div style="text-align: center; color: gray;">
-        <p>ATS Resume Analyzer - NLP Project © 2023</p>
+        <p>ATS Resume Analyzer - NLP Project © 2025</p>
     </div>
 """, unsafe_allow_html=True)
